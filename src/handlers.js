@@ -5,10 +5,6 @@ import {
   CHANGE_COLOR
 } from './events'
 
-const Arduino = new SerialPort('/dev/ttyACM0', { baudRate: 9600 }, (error) => {
-  if (error) return console.log('Cannot connect to arduino :(')
-})
-
 export default class Arduino {
   constructor(port) {
     this.arduino = new SerialPort(port, { baudRate: 9600}, (error) => {
