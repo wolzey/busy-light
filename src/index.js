@@ -17,4 +17,8 @@ setTimeout(() => {
   Arduino.changeColorHandler('155', '000', '255');
 }, 6000)
 
+setTimeout(() => {
+  Arduino.turnOffHandler();
+}, 9000)
+
 app.listen(process.env.PORT || 3001)
