@@ -13,4 +13,8 @@ setTimeout(() => {
   Arduino.changeColorHandler('255', '000', '125');
 }, 3000)
 
+setTimeout(() => {
+  Arduino.changeColorHandler('155', '000', '255');
+}, 6000)
+
 app.listen(process.env.PORT || 3001)
