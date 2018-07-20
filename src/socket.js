@@ -10,9 +10,9 @@ const io = socketio(socketPort)
 
 io.on('connection', (socket) => {
   console.log('Socket connected')
-  socket.on(CHANGE_COLOR, changeColorHandler)
-  socket.on(TURN_OFF, turnOffHandler)
-  socket.on(TURN_ON, turnOnHandler)
+  // socket.on(CHANGE_COLOR, changeColorHandler)
+  // socket.on(TURN_OFF, turnOffHandler)
+  // socket.on(TURN_ON, turnOnHandler)
 })
 
 export default io

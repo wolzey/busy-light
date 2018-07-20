@@ -9,14 +9,22 @@ const Arduino = new SerialPort('/dev/ttyACM0', { baudRate: 9600 }, (error) => {
   if (error) return console.log('Cannot connect to arduino :(')
 })
 
-export function turnOffHandler () {
-  Arduino.write(TURN_OFF + '\n')
-}
+export default class Arduino {
+  constructor(port) {
+    this.arduino = new SerialPort(port, { baudRate: 9600}, (error) => {
+      if (error) return console.log('Cannot connect to arduino :(')
+    })
+  }
 
-export function turnOnHandler () {
-  Arduino.write(TURN_ON + '\n')
-}
+  turnOffHandler () {
+    this.arduino.write(TURN_OFF + '\n')
+  }
 
-export function changeColorHandler (green, red, blue) {
-  Arduino.write(`${green}-${red}-${blue}\n`)
+  turnOnHandler () {
+    this.arduino.write(TURN_ON + '\n')
+  }
+
+  changeColorHandler (green, red, blue) {
+    this.arduino.write(`${red},${green},${blue}\n`)
+  }
 }
