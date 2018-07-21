@@ -6,12 +6,11 @@ app.use(require('cors')())
 let io = require('socket.io')(1337)
 
 import ArduinoService from './handlers'
-let Arduino = new ArduinoService("/dev/ttyACM0")
+const Arduino = new ArduinoService("/dev/ttyACM0")
 
 io.on('connection', (socket) => {
-  console.log('User connected')
-  socket.on('turn on', Arduino.turnOnHandler)
-  socket.on('turn off', Arduino.turnOffHandler)
+  socket.on('turn on', Arduino.turnOnHandler.bind(Arduino))
+  socket.on('turn off', Arduino.turnOffHandler.bind(Arduino))
 })
 
 app.get('/', (req, res) => {
