@@ -1,4 +1,3 @@
-import socketio from 'socket.io'
 import { socketPort } from './config'
 import {
   CHANGE_COLOR,
@@ -6,7 +5,7 @@ import {
   TURN_ON
 } from './events'
 
-const io = socketio(socketPort)
+const io = require('socket.io')(socketPort)
 
 io.on('connection', (socket) => {
   console.log('Socket connected')
@@ -14,5 +13,7 @@ io.on('connection', (socket) => {
   // socket.on(TURN_OFF, turnOffHandler)
   // socket.on(TURN_ON, turnOnHandler)
 })
+
+io.on('error', (err) => console.log(err))
 
 export default io

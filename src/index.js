@@ -1,24 +1,21 @@
 import express  from 'express'
-import socketio from 'socket.io'
 
 const app = express()
+app.use(require('cors')())
 
-import './socket'
+let io = require('socket.io')(1337)
 
 import ArduinoService from './handlers'
-
 let Arduino = new ArduinoService("/dev/ttyACM0")
 
-setTimeout(() => {
-  Arduino.changeColorHandler('255', '000', '125');
-}, 3000)
+io.on('connection', (socket) => {
+  console.log('User connected')
+  socket.on('turn on', Arduino.turnOnHandler)
+  socket.on('turn off', Arduino.turnOffHandler)
+})
 
-setTimeout(() => {
-  Arduino.changeColorHandler('155', '000', '255');
-}, 6000)
-
-setTimeout(() => {
-  Arduino.turnOffHandler();
-}, 9000)
+app.get('/', (req, res) => {
+  return res.json('ok')
+})
 
 app.listen(process.env.PORT || 3001)
