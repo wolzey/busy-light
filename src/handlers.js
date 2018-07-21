@@ -20,7 +20,7 @@ export default class Arduino {
     this.arduino.write(TURN_ON + '\n')
   }
 
-  changeColorHandler (green, red, blue) {
+  changeColorHandler (red, green, blue) {
     this.arduino.write(`${red},${green},${blue}\n`)
   }
 }

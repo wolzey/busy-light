@@ -9,8 +9,15 @@ import ArduinoService from './handlers'
 const Arduino = new ArduinoService("/dev/ttyACM0")
 
 io.on('connection', (socket) => {
-  socket.on('turn on', Arduino.turnOnHandler.bind(Arduino))
-  socket.on('turn off', Arduino.turnOffHandler.bind(Arduino))
+  socket.on('turn on', () => {
+    Arduino.turnOnHandler()
+  })
+  socket.on('turn off', () => {
+    Arduino.turnOffHandler()
+  })
+  socket.on('change color', ({red, green, blue}) => {
+    Arduino.changeColorHandler(red, green, blue)
+  })
 })
 
 app.get('/', (req, res) => {
@@ -18,3 +25,4 @@ app.get('/', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3001)
+console.log("app healthy... Listening...", process.env.PORT || 3001)
